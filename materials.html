@@ -96,57 +96,86 @@
 
 <script>
     const buildingProducts = [
+        // Foundation
         { name: "Concrete (Cubic Yard)", category: "Foundation", price: "$150-180", description: "Ready-mix concrete for foundations", supplier: "BuildRight Supplies", icon: "🏗️" },
-        { name: "Rebar Steel", category: "Foundation", price: "$0.50-0.80/lb", description: "Reinforcement steel for concrete", supplier: "Steel Supply Co", icon: "⚙️" },
-        { name: "Foundation Sealant", category: "Foundation", price: "$30-50", description: "Waterproof sealant for foundations", supplier: "Sealant Pro", icon: "🔧" },
-        { name: "Gravel & Drainage Stone", category: "Foundation", price: "$40-60/ton", description: "Drainage layers for foundation", supplier: "Stone Depot", icon: "🪨" },
-        
+        { name: "Rebar Steel (per lb)", category: "Foundation", price: "$0.50-0.80", description: "Reinforcement steel for concrete", supplier: "Steel Supply Co", icon: "⚙️" },
+        { name: "Foundation Sealant (quart)", category: "Foundation", price: "$15-25", description: "Waterproofing sealant", supplier: "SealTight", icon: "🛡️" },
+        { name: "Concrete Additives (bag)", category: "Foundation", price: "$8-15", description: "Strength enhancing additives", supplier: "ConcreteMax", icon: "📦" },
+        { name: "Foundation Bolts (box)", category: "Foundation", price: "$20-35", description: "Heavy-duty anchor bolts", supplier: "BoltPro", icon: "🔧" },
+        // Framing & Structure
         { name: "2x4 Lumber (per 8ft)", category: "Framing", price: "$8-12", description: "Standard framing lumber", supplier: "Timber House", icon: "🪵" },
-        { name: "2x10 Floor Joists", category: "Framing", price: "$15-20", description: "Floor support beams", supplier: "Lumber Mill", icon: "🪵" },
-        { name: "Roof Trusses (per truss)", category: "Framing", price: "$50-80", description: "Pre-built roof support", supplier: "Truss Factory", icon: "📐" },
-        { name: "Structural Steel Beams", category: "Framing", price: "$1200-2000", description: "Heavy support beams", supplier: "Steel Works", icon: "📏" },
-        
-        { name: "Asphalt Shingles (per bundle)", category: "Roofing", price: "$30-50", description: "Standard roof shingles", supplier: "Roof Masters", icon: "🏠" },
-        { name: "Metal Roofing (per sq ft)", category: "Roofing", price: "$8-15", description: "Durable metal roof panels", supplier: "MetalRoof Inc", icon: "🔩" },
-        { name: "Roof Underlayment", category: "Roofing", price: "$0.80-1.50/sq ft", description: "Moisture barrier layer", supplier: "Underlayment Co", icon: "📋" },
-        { name: "Gutters & Downspouts", category: "Roofing", price: "$5-10/ft", description: "Drainage system for roof", supplier: "Gutter Masters", icon: "🌧️" },
-        
+        { name: "2x6 Lumber (per 8ft)", category: "Framing", price: "$12-18", description: "Premium framing lumber", supplier: "Timber House", icon: "🪵" },
+        { name: "2x8 Lumber (per 8ft)", category: "Framing", price: "$18-28", description: "Heavy-duty framing", supplier: "Timber House", icon: "🪵" },
+        { name: "Plywood Sheets (4x8)", category: "Framing", price: "$35-60", description: "Structural plywood", supplier: "WoodSupply Co", icon: "📋" },
+        { name: "Wall Fasteners (box)", category: "Framing", price: "$10-20", description: "Nails and screws assortment", supplier: "FastenRight", icon: "📌" },
+        { name: "Beam Hangers (pack)", category: "Framing", price: "$25-40", description: "Metal joist hangers", supplier: "MetalWorks", icon: "⚙️" },
+        // Roofing Materials
+        { name: "Asphalt Shingles (per bundle)", category: "Roofing", price: "$30-50", description: "Standard asphalt shingles", supplier: "Roof Masters", icon: "🏠" },
+        { name: "Metal Roofing Panels (per sq ft)", category: "Roofing", price: "$8-15", description: "Premium metal roofing", supplier: "MetalRoof Pro", icon: "⬜" },
+        { name: "Roof Underlayment (roll)", category: "Roofing", price: "$40-70", description: "Moisture barrier underlayment", supplier: "RoofShield", icon: "🛡️" },
+        { name: "Roofing Nails (box)", category: "Roofing", price: "$8-12", description: "Galvanized roofing nails", supplier: "NailMaster", icon: "📌" },
+        { name: "Flashing (roll)", category: "Roofing", price: "$20-40", description: "Metal water flashing", supplier: "FlashingPro", icon: "⛓️" },
+        // Electrical Supplies
         { name: "Electrical Wire (per 250ft roll)", category: "Electrical", price: "$40-70", description: "Copper wiring", supplier: "ElectroSupply", icon: "⚡" },
-        { name: "Circuit Breaker Box", category: "Electrical", price: "$150-300", description: "Main electrical panel", supplier: "ElectroSmart", icon: "🔌" },
-        { name: "In-Wall Outlets", category: "Electrical", price: "$2-5", description: "Electrical receptacles", supplier: "PowerPlus", icon: "🔌" },
-        { name: "Light Switches", category: "Electrical", price: "$3-8", description: "Standard light switches", supplier: "SwitchHub", icon: "💡" },
-        
+        { name: "Circuit Breaker Panel", category: "Electrical", price: "$200-400", description: "Main electrical panel", supplier: "ElectroSupply", icon: "📦" },
+        { name: "Outlet Boxes (pack)", category: "Electrical", price: "$15-25", description: "Wall outlet installation boxes", supplier: "CircuitMaster", icon: "🔌" },
+        { name: "Light Fixtures (each)", category: "Electrical", price: "$30-100", description: "Ceiling and wall lights", supplier: "BrightLights Co", icon: "💡" },
+        { name: "Electrical Conduit (10ft)", category: "Electrical", price: "$12-20", description: "PVC and metal conduit", supplier: "TubeWorks", icon: "⚙️" },
+        { name: "Wall Switches (pack)", category: "Electrical", price: "$10-18", description: "Standard light switches", supplier: "SwitchPro", icon: "🔌" },
+        // Plumbing
         { name: "PVC Pipes (10ft)", category: "Plumbing", price: "$15-30", description: "Plastic water/waste pipes", supplier: "PipeWorks", icon: "🚰" },
-        { name: "Copper Tubing (10ft)", category: "Plumbing", price: "$40-80", description: "Premium water lines", supplier: "CopperSupply", icon: "🚰" },
-        { name: "Toilets", category: "Plumbing", price: "$150-400", description: "Standard bathroom toilets", supplier: "PorcelaMax", icon: "🚽" },
-        { name: "Sinks & Faucets", category: "Plumbing", price: "$100-500", description: "Kitchen and bathroom sinks", supplier: "FaucetWorld", icon: "🚿" },
-        
-        { name: "HVAC Unit (Central AC)", category: "HVAC", price: "$2500-5000", description: "Air conditioning system", supplier: "CoolComfort", icon: "❄️" },
-        { name: "Ductwork", category: "HVAC", price: "$1-3/ft", description: "Air distribution system", supplier: "DuctMasters", icon: "🌬️" },
-        { name: "Thermostat", category: "HVAC", price: "$50-300", description: "Temperature control system", supplier: "ThermoTech", icon: "🌡️" },
-        
+        { name: "Copper Pipes (10ft)", category: "Plumbing", price: "$40-80", description: "Premium copper piping", supplier: "CopperLine", icon: "🚰" },
+        { name: "Water Heater Tankless", category: "Plumbing", price: "$800-1500", description: "Energy-efficient water heater", supplier: "AquaHeat", icon: "🌡️" },
+        { name: "Faucets & Fixtures (each)", category: "Plumbing", price: "$50-150", description: "Kitchen and bath faucets", supplier: "FaucetPro", icon: "🚰" },
+        { name: "Pipe Fittings (box)", category: "Plumbing", price: "$20-40", description: "Elbows, tees, couplings", supplier: "PipeWorks", icon: "⚙️" },
+        { name: "Shut-off Valves (pack)", category: "Plumbing", price: "$15-30", description: "Water shut-off valves", supplier: "ValveMaster", icon: "🔌" },
+        // HVAC & Ventilation
+        { name: "Central AC Unit", category: "HVAC", price: "$2500-5000", description: "Complete air conditioning system", supplier: "CoolComfort", icon: "❄️" },
+        { name: "Furnace Unit", category: "HVAC", price: "$1500-3000", description: "High-efficiency furnace", supplier: "HeatMax", icon: "🔥" },
+        { name: "Ductwork (per ft)", category: "HVAC", price: "$5-15", description: "HVAC duct work", supplier: "DuctPro", icon: "⬜" },
+        { name: "Programmable Thermostat", category: "HVAC", price: "$100-200", description: "Smart temperature control", supplier: "TempControl", icon: "🌡️" },
+        { name: "HVAC Air Filters (pack)", category: "HVAC", price: "$15-30", description: "Replacement air filters", supplier: "FilterClean", icon: "📦" },
+        // Insulation
         { name: "Fiberglass Batts (per 100 sq ft)", category: "Insulation", price: "$30-60", description: "Wall and attic insulation", supplier: "InsulateRight", icon: "🧊" },
-        { name: "Spray Foam", category: "Insulation", price: "$1-2/sq ft", description: "Expanding foam insulation", supplier: "FoamTech", icon: "☁️" },
-        
+        { name: "Spray Foam Insulation (can)", category: "Insulation", price: "$25-45", description: "Expanding foam insulation", supplier: "FoamSeal", icon: "☁️" },
+        { name: "Rigid Foam Board (per board)", category: "Insulation", price: "$20-40", description: "Rigid foam insulation boards", supplier: "InsulateRight", icon: "📦" },
+        { name: "Vapor Barrier (roll)", category: "Insulation", price: "$15-30", description: "Moisture control barrier", supplier: "SealRight", icon: "🛡️" },
+        { name: "Insulation Tape (roll)", category: "Insulation", price: "$5-10", description: "Sealing and tape", supplier: "TapeMaster", icon: "📋" },
+        // Flooring
         { name: "Hardwood Flooring (sq ft)", category: "Flooring", price: "$5-15", description: "Premium wood floors", supplier: "WoodFloors Inc", icon: "🪵" },
-        { name: "Ceramic Tiles", category: "Flooring", price: "$2-8/sq ft", description: "Bathroom and kitchen tiles", supplier: "TileMax", icon: "🔲" },
-        { name: "Laminate Flooring", category: "Flooring", price: "$1.50-4/sq ft", description: "Budget-friendly flooring", supplier: "LaminateLand", icon: "📦" },
-        
+        { name: "Laminate Flooring (sq ft)", category: "Flooring", price: "$2-8", description: "Budget-friendly flooring", supplier: "LaminatePro", icon: "▪️" },
+        { name: "Ceramic Tile (sq ft)", category: "Flooring", price: "$3-12", description: "Premium ceramic tiles", supplier: "TileMaster", icon: "⬜" },
+        { name: "Vinyl Plank Flooring (sq ft)", category: "Flooring", price: "$2-6", description: "Waterproof vinyl flooring", supplier: "VinylMax", icon: "▪️" },
+        { name: "Carpet (sq yard)", category: "Flooring", price: "$5-20", description: "Premium carpet material", supplier: "CarpetWorld", icon: "🛋️" },
+        { name: "Floor Underlayment (roll)", category: "Flooring", price: "$30-60", description: "Sound and moisture dampening", supplier: "UnderPad Pro", icon: "📦" },
+        // Interior Finishing
         { name: "Drywall Sheets", category: "Interior", price: "$15-20", description: "4x8 drywall panels", supplier: "DrywallPro", icon: "📋" },
-        { name: "Joint Compound (bucket)", category: "Interior", price: "$15-25", description: "Drywall finishing compound", supplier: "CompoundPro", icon: "🪣" },
-        
-        { name: "Interior Paint (gallon)", category: "Paint", price: "$25-45", description: "Interior wall paint", supplier: "ColorWorks", icon: "🎨" },
-        { name: "Exterior Paint (gallon)", category: "Paint", price: "$35-60", description: "Weather-resistant paint", supplier: "WeatherShield", icon: "🎨" },
-        { name: "Primer", category: "Paint", price: "$20-35", description: "Surface preparation primer", supplier: "PrimerPro", icon: "🎨" },
-        
+        { name: "Joint Compound (bucket)", category: "Interior", price: "$15-25", description: "Spackling and joint compound", supplier: "FinishPro", icon: "🪣" },
+        { name: "Mudding Tape (roll)", category: "Interior", price: "$8-15", description: "Drywall joint tape", supplier: "TapeMaster", icon: "📋" },
+        { name: "Corner Bead (box)", category: "Interior", price: "$10-20", description: "Metal corner protection", supplier: "EdgeGuard", icon: "⚙️" },
+        { name: "Drywall Fasteners (box)", category: "Interior", price: "$8-12", description: "Screws and nails", supplier: "FastenRight", icon: "📌" },
+        // Paint & Coatings
+        { name: "Interior Paint (gallon)", category: "Paint", price: "$25-45", description: "Premium interior wall paint", supplier: "ColorWorks", icon: "🎨" },
+        { name: "Exterior Paint (gallon)", category: "Paint", price: "$35-60", description: "Weather-resistant exterior paint", supplier: "WeatherShield", icon: "🎨" },
+        { name: "Primer (gallon)", category: "Paint", price: "$20-35", description: "Paint primer and undercoat", supplier: "FoundationCoat", icon: "🎨" },
+        { name: "Wood Stain (quart)", category: "Paint", price: "$15-30", description: "Interior wood stain", supplier: "StainMaster", icon: "🎨" },
+        { name: "Polyurethane Finish (quart)", category: "Paint", price: "$20-40", description: "Wood floor finish", supplier: "FinishPro", icon: "✨" },
+        // Painting Tools
         { name: "Paint Brush Set", category: "Tools", price: "$15-30", description: "Professional grade brushes", supplier: "BrushPro", icon: "🖌️" },
-        { name: "Paint Roller Kit", category: "Tools", price: "$20-40", description: "Roller, handle & tray set", supplier: "RollerMasters", icon: "🎨" },
-        { name: "Painter's Tape", category: "Tools", price: "$4-8/roll", description: "Precision masking tape", supplier: "TapeMaster", icon: "📛" },
-        
+        { name: "Paint Roller Kit", category: "Tools", price: "$20-40", description: "Roller frames and covers", supplier: "RollerMax", icon: "🎪" },
+        { name: "Paint Sprayer", category: "Tools", price: "$50-150", description: "Electric paint sprayer", supplier: "SprayTech", icon: "💨" },
+        { name: "Painter's Tape (roll)", category: "Tools", price: "$5-10", description: "Masking tape for clean edges", supplier: "TapeMaster", icon: "📋" },
+        { name: "Drop Cloth (pack)", category: "Tools", price: "$10-20", description: "Canvas drop protection", supplier: "ProtectAll", icon: "🛡️" },
+        { name: "Paint Tray & Liners", category: "Tools", price: "$8-15", description: "Disposable paint trays", supplier: "PaintSupply", icon: "🪣" },
+        // Decorating & Decor
         { name: "Wallpaper (roll)", category: "Decorating", price: "$15-50", description: "Decorative wall covering", supplier: "WallArt Co", icon: "🖼️" },
-        { name: "Crown Molding", category: "Decorating", price: "$1-4/ft", description: "Decorative ceiling trim", supplier: "MoldingMasters", icon: "👑" },
-        { name: "Wall Mirrors", category: "Decorating", price: "$50-300", description: "Decorative mirrors for walls", supplier: "MirrorArt", icon: "🪞" },
-        { name: "Decorative Lighting Fixtures", category: "Decorating", price: "$50-500", description: "Designer light fixtures", supplier: "LuxeLights", icon: "💡" }
+        { name: "Crown Molding (per linear ft)", category: "Decorating", price: "$1-4", description: "Decorative ceiling trim", supplier: "MoldingMasters", icon: "👑" },
+        { name: "Baseboards (per linear ft)", category: "Decorating", price: "$0.75-3", description: "Floor trim molding", supplier: "TrimPro", icon: "📏" },
+        { name: "Door Hardware Sets", category: "Decorating", price: "$20-80", description: "Handles, knobs, hinges", supplier: "HardwarePro", icon: "🚪" },
+        { name: "Light Switch Plates", category: "Decorating", price: "$5-15", description: "Decorative switch covers", supplier: "DecorPlates", icon: "🔌" },
+        { name: "Cabinet Hardware", category: "Decorating", price: "$10-50", description: "Pulls and knobs for cabinets", supplier: "CabinetStyle", icon: "🚪" },
+        { name: "Ceiling Medallions", category: "Decorating", price: "$15-75", description: "Decorative ceiling accents", supplier: "DecorAccents", icon: "🎀" },
+        { name: "Wall Mount Shelving", category: "Decorating", price: "$30-100", description: "Decorative wall shelves", supplier: "ShelfStyle", icon: "📚" }
     ];
 
     function displayProducts(data) {
