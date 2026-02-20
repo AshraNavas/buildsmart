@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building Materials – BuildSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FDFCF8",
+                        foreground: "#2C2C24",
+                        primary: "#5D7052",
+                        secondary: "#C18C5D",
+                        accent: "#E6DCCD",
+                        muted: "#F0EBE5",
+                        border: "#DED8CF",
+                    },
+                    fontFamily: {
+                        heading: ["Fraunces", "serif"],
+                        body: ["Nunito", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; z-index: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-foreground font-body relative">
+
+<nav class="sticky top-4 z-50 max-w-6xl mx-auto bg-white/70 backdrop-blur-md rounded-full border border-border/50 shadow-lg px-6 py-3 flex justify-between items-center mt-4">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-80">
+        <div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">B</div>
+        <span class="font-heading font-bold text-lg">BuildSmart</span>
+    </a>
+    <div class="hidden md:flex gap-6 text-sm font-semibold text-primary">
+        <a href="find-pros.html" class="hover:underline">Find Pros</a>
+        <a href="roadmap.html" class="hover:underline">Roadmap</a>
+        <a href="materials.html" class="hover:underline">Materials</a>
+        <a href="professionals.html" class="hover:underline">Professionals</a>
+        <a href="team-dashboard.html" class="hover:underline">Team</a>
+        <a href="join-network.html" class="hover:underline">Join Network</a>
+    </div>
+</nav>
+
+<section class="py-20 px-6 bg-muted/20">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-4xl font-bold mb-4 text-center">Building Materials & Products</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Everything you need to build your dream home</p>
+        
+        <div class="flex flex-col md:flex-row gap-4 mb-12 justify-center">
+            <input type="text" id="productSearch" placeholder="Search products..." class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-80 focus:ring-2 ring-primary/20"/>
+            <select id="categoryFilter" class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-64">
+                <option value="All">All Categories</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Framing">Framing & Structure</option>
+                <option value="Roofing">Roofing Materials</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Plumbing">Plumbing</option>
+                <option value="HVAC">HVAC & Ventilation</option>
+                <option value="Insulation">Insulation</option>
+                <option value="Flooring">Flooring</option>
+                <option value="Interior">Interior Finishing</option>
+                <option value="Paint">Paint & Coatings</option>
+                <option value="Tools">Painting Tools</option>
+                <option value="Decorating">Decorating & Decor</option>
+            </select>
+            <button onclick="filterProducts()" class="bg-primary text-white rounded-full px-10 h-12 font-semibold hover:bg-opacity-90 transition">Search</button>
+        </div>
+
+        <div id="productsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 bg-primary text-white text-center">
+    <p>© 2026 BuildSmart Hub • Supporting the Hands that Build.</p>
+</footer>
+
+<script>
+    const buildingProducts = [
+        { name: "Concrete (Cubic Yard)", category: "Foundation", price: "$150-180", description: "Ready-mix concrete for foundations", supplier: "BuildRight Supplies", icon: "🏗️" },
+        { name: "Rebar Steel", category: "Foundation", price: "$0.50-0.80/lb", description: "Reinforcement steel for concrete", supplier: "Steel Supply Co", icon: "⚙️" },
+        { name: "Foundation Sealant", category: "Foundation", price: "$30-50", description: "Waterproof sealant for foundations", supplier: "Sealant Pro", icon: "🔧" },
+        { name: "Gravel & Drainage Stone", category: "Foundation", price: "$40-60/ton", description: "Drainage layers for foundation", supplier: "Stone Depot", icon: "🪨" },
+        
+        { name: "2x4 Lumber (per 8ft)", category: "Framing", price: "$8-12", description: "Standard framing lumber", supplier: "Timber House", icon: "🪵" },
+        { name: "2x10 Floor Joists", category: "Framing", price: "$15-20", description: "Floor support beams", supplier: "Lumber Mill", icon: "🪵" },
+        { name: "Roof Trusses (per truss)", category: "Framing", price: "$50-80", description: "Pre-built roof support", supplier: "Truss Factory", icon: "📐" },
+        { name: "Structural Steel Beams", category: "Framing", price: "$1200-2000", description: "Heavy support beams", supplier: "Steel Works", icon: "📏" },
+        
+        { name: "Asphalt Shingles (per bundle)", category: "Roofing", price: "$30-50", description: "Standard roof shingles", supplier: "Roof Masters", icon: "🏠" },
+        { name: "Metal Roofing (per sq ft)", category: "Roofing", price: "$8-15", description: "Durable metal roof panels", supplier: "MetalRoof Inc", icon: "🔩" },
+        { name: "Roof Underlayment", category: "Roofing", price: "$0.80-1.50/sq ft", description: "Moisture barrier layer", supplier: "Underlayment Co", icon: "📋" },
+        { name: "Gutters & Downspouts", category: "Roofing", price: "$5-10/ft", description: "Drainage system for roof", supplier: "Gutter Masters", icon: "🌧️" },
+        
+        { name: "Electrical Wire (per 250ft roll)", category: "Electrical", price: "$40-70", description: "Copper wiring", supplier: "ElectroSupply", icon: "⚡" },
+        { name: "Circuit Breaker Box", category: "Electrical", price: "$150-300", description: "Main electrical panel", supplier: "ElectroSmart", icon: "🔌" },
+        { name: "In-Wall Outlets", category: "Electrical", price: "$2-5", description: "Electrical receptacles", supplier: "PowerPlus", icon: "🔌" },
+        { name: "Light Switches", category: "Electrical", price: "$3-8", description: "Standard light switches", supplier: "SwitchHub", icon: "💡" },
+        
+        { name: "PVC Pipes (10ft)", category: "Plumbing", price: "$15-30", description: "Plastic water/waste pipes", supplier: "PipeWorks", icon: "🚰" },
+        { name: "Copper Tubing (10ft)", category: "Plumbing", price: "$40-80", description: "Premium water lines", supplier: "CopperSupply", icon: "🚰" },
+        { name: "Toilets", category: "Plumbing", price: "$150-400", description: "Standard bathroom toilets", supplier: "PorcelaMax", icon: "🚽" },
+        { name: "Sinks & Faucets", category: "Plumbing", price: "$100-500", description: "Kitchen and bathroom sinks", supplier: "FaucetWorld", icon: "🚿" },
+        
+        { name: "HVAC Unit (Central AC)", category: "HVAC", price: "$2500-5000", description: "Air conditioning system", supplier: "CoolComfort", icon: "❄️" },
+        { name: "Ductwork", category: "HVAC", price: "$1-3/ft", description: "Air distribution system", supplier: "DuctMasters", icon: "🌬️" },
+        { name: "Thermostat", category: "HVAC", price: "$50-300", description: "Temperature control system", supplier: "ThermoTech", icon: "🌡️" },
+        
+        { name: "Fiberglass Batts (per 100 sq ft)", category: "Insulation", price: "$30-60", description: "Wall and attic insulation", supplier: "InsulateRight", icon: "🧊" },
+        { name: "Spray Foam", category: "Insulation", price: "$1-2/sq ft", description: "Expanding foam insulation", supplier: "FoamTech", icon: "☁️" },
+        
+        { name: "Hardwood Flooring (sq ft)", category: "Flooring", price: "$5-15", description: "Premium wood floors", supplier: "WoodFloors Inc", icon: "🪵" },
+        { name: "Ceramic Tiles", category: "Flooring", price: "$2-8/sq ft", description: "Bathroom and kitchen tiles", supplier: "TileMax", icon: "🔲" },
+        { name: "Laminate Flooring", category: "Flooring", price: "$1.50-4/sq ft", description: "Budget-friendly flooring", supplier: "LaminateLand", icon: "📦" },
+        
+        { name: "Drywall Sheets", category: "Interior", price: "$15-20", description: "4x8 drywall panels", supplier: "DrywallPro", icon: "📋" },
+        { name: "Joint Compound (bucket)", category: "Interior", price: "$15-25", description: "Drywall finishing compound", supplier: "CompoundPro", icon: "🪣" },
+        
+        { name: "Interior Paint (gallon)", category: "Paint", price: "$25-45", description: "Interior wall paint", supplier: "ColorWorks", icon: "🎨" },
+        { name: "Exterior Paint (gallon)", category: "Paint", price: "$35-60", description: "Weather-resistant paint", supplier: "WeatherShield", icon: "🎨" },
+        { name: "Primer", category: "Paint", price: "$20-35", description: "Surface preparation primer", supplier: "PrimerPro", icon: "🎨" },
+        
+        { name: "Paint Brush Set", category: "Tools", price: "$15-30", description: "Professional grade brushes", supplier: "BrushPro", icon: "🖌️" },
+        { name: "Paint Roller Kit", category: "Tools", price: "$20-40", description: "Roller, handle & tray set", supplier: "RollerMasters", icon: "🎨" },
+        { name: "Painter's Tape", category: "Tools", price: "$4-8/roll", description: "Precision masking tape", supplier: "TapeMaster", icon: "📛" },
+        
+        { name: "Wallpaper (roll)", category: "Decorating", price: "$15-50", description: "Decorative wall covering", supplier: "WallArt Co", icon: "🖼️" },
+        { name: "Crown Molding", category: "Decorating", price: "$1-4/ft", description: "Decorative ceiling trim", supplier: "MoldingMasters", icon: "👑" },
+        { name: "Wall Mirrors", category: "Decorating", price: "$50-300", description: "Decorative mirrors for walls", supplier: "MirrorArt", icon: "🪞" },
+        { name: "Decorative Lighting Fixtures", category: "Decorating", price: "$50-500", description: "Designer light fixtures", supplier: "LuxeLights", icon: "💡" }
+    ];
+
+    function displayProducts(data) {
+        const grid = document.getElementById('productsGrid');
+        grid.innerHTML = data.map(product => `
+            <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md hover:shadow-xl transition-all">
+                <div class="text-4xl mb-3">${product.icon}</div>
+                <h3 class="font-heading text-xl font-bold mb-1">${product.name}</h3>
+                <p class="text-secondary font-semibold text-xs uppercase tracking-wider mb-2">${product.category}</p>
+                <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+                <div class="border-t border-border pt-3">
+                    <p class="text-xs text-gray-500 mb-2">Supplier: <span class="font-semibold">${product.supplier}</span></p>
+                    <p class="text-lg font-bold text-primary">${product.price}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterProducts() {
+        const search = document.getElementById('productSearch').value.toLowerCase();
+        const category = document.getElementById('categoryFilter').value;
+        
+        const filtered = buildingProducts.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(search) || product.description.toLowerCase().includes(search);
+            const matchesCategory = category === "All" || product.category === category;
+            return matchesSearch && matchesCategory;
+        });
+        
+        displayProducts(filtered);
+    }
+
+    // Initial Load
+    displayProducts(buildingProducts);
+</script>
+
+</body>
+</html>

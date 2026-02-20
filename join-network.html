@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Network – BuildSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FDFCF8",
+                        foreground: "#2C2C24",
+                        primary: "#5D7052",
+                        secondary: "#C18C5D",
+                        accent: "#E6DCCD",
+                        muted: "#F0EBE5",
+                        border: "#DED8CF",
+                    },
+                    fontFamily: {
+                        heading: ["Fraunces", "serif"],
+                        body: ["Nunito", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; z-index: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-foreground font-body relative">
+
+<nav class="sticky top-4 z-50 max-w-6xl mx-auto bg-white/70 backdrop-blur-md rounded-full border border-border/50 shadow-lg px-6 py-3 flex justify-between items-center mt-4">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-80">
+        <div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">B</div>
+        <span class="font-heading font-bold text-lg">BuildSmart</span>
+    </a>
+    <div class="hidden md:flex gap-6 text-sm font-semibold text-primary">
+        <a href="find-pros.html" class="hover:underline">Find Pros</a>
+        <a href="roadmap.html" class="hover:underline">Roadmap</a>
+        <a href="materials.html" class="hover:underline">Materials</a>
+        <a href="professionals.html" class="hover:underline">Professionals</a>
+        <a href="team-dashboard.html" class="hover:underline">Team</a>
+        <a href="join-network.html" class="hover:underline">Join Network</a>
+    </div>
+</nav>
+
+<section class="py-20 px-6 bg-gradient-to-b from-accent/20 to-muted/30">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-4xl font-bold mb-4 text-center">Join Our Network</h1>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Register as an engineer, electrician, plumber, designer, or add your firm to connect with builders and professionals</p>
+        
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Professional Registration -->
+            <div class="flex-1 bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+                <h3 class="font-heading text-2xl font-bold mb-6 text-primary">Professional Registration</h3>
+                <form onsubmit="registerProfessional(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Full Name</label>
+                        <input type="text" required placeholder="John Doe" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email Address</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Profession</label>
+                        <select required class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20">
+                            <option value="">Select Your Profession</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Interior Designer">Interior Designer</option>
+                            <option value="Architect">Architect</option>
+                            <option value="Carpenter">Carpenter</option>
+                            <option value="HVAC Technician">HVAC Technician</option>
+                            <option value="Painter">Painter</option>
+                            <option value="Roofing Specialist">Roofing Specialist</option>
+                            <option value="Structural Engineer">Structural Engineer</option>
+                            <option value="Civil Engineer">Civil Engineer</option>
+                            <option value="Electrical Engineer">Electrical Engineer</option>
+                            <option value="Mechanical Engineer">Mechanical Engineer</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Phone Number</label>
+                        <input type="tel" required placeholder="+1 555-0000" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">City/Location</label>
+                        <input type="text" required placeholder="Austin, TX" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Years of Experience</label>
+                        <input type="number" required placeholder="5" min="0" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white rounded-lg px-6 py-3 font-bold hover:bg-opacity-90 transition">Register as Professional</button>
+                </form>
+            </div>
+
+            <!-- Firm Registration -->
+            <div class="flex-1 bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+                <h3 class="font-heading text-2xl font-bold mb-6 text-secondary">Add Your Firm</h3>
+                <form onsubmit="registerFirm(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Firm Name</label>
+                        <input type="text" required placeholder="BuildRight Company" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Contact Email</label>
+                        <input type="email" required placeholder="contact@firm.com" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Industry Type</label>
+                        <select required class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20">
+                            <option value="">Select Industry</option>
+                            <option value="Electrical Contractor">Electrical Contractor</option>
+                            <option value="Plumbing Contractor">Plumbing Contractor</option>
+                            <option value="HVAC Contractor">HVAC Contractor</option>
+                            <option value="Construction Company">Construction Company</option>
+                            <option value="Architecture Firm">Architecture Firm</option>
+                            <option value="Interior Design Firm">Interior Design Firm</option>
+                            <option value="Engineering Firm">Engineering Firm</option>
+                            <option value="Materials Supplier">Materials Supplier</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Phone Number</label>
+                        <input type="tel" required placeholder="+1 555-0000" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Headquarters Location</label>
+                        <input type="text" required placeholder="Austin, TX" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Years in Business</label>
+                        <input type="number" required placeholder="10" min="0" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <button type="submit" class="w-full bg-secondary text-white rounded-lg px-6 py-3 font-bold hover:bg-opacity-90 transition">Register Firm</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="registrationMessage" class="mt-8 text-center hidden">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Registration submitted successfully!</p>
+                <p class="text-sm mt-1">We'll review your information and contact you soon.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 bg-primary text-white text-center">
+    <p>© 2026 BuildSmart Hub • Supporting the Hands that Build.</p>
+</footer>
+
+<script>
+    function registerProfessional(event) {
+        event.preventDefault();
+        const form = event.target;
+        const inputs = form.querySelectorAll('input');
+        const selects = form.querySelectorAll('select');
+        
+        const fullName = inputs[0].value;
+        const email = inputs[1].value;
+        const phone = inputs[2].value;
+        const location = inputs[3].value;
+        const experience = inputs[4].value;
+        const profession = selects[0].value;
+        
+        if (!fullName || !email || !profession || !phone || !location || !experience) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        const messageDiv = document.getElementById('registrationMessage');
+        messageDiv.classList.remove('hidden');
+        messageDiv.innerHTML = `
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Registration submitted successfully!</p>
+                <p class="text-sm mt-1">Welcome ${fullName}! Your profile as a ${profession} has been created. We'll contact you at ${email} soon.</p>
+            </div>
+        `;
+        
+        form.reset();
+        
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 5000);
+    }
+
+    function registerFirm(event) {
+        event.preventDefault();
+        const form = event.target;
+        const inputs = form.querySelectorAll('input');
+        const selects = form.querySelectorAll('select');
+        
+        const firmName = inputs[0].value;
+        const email = inputs[1].value;
+        const phone = inputs[2].value;
+        const location = inputs[3].value;
+        const yearsInBusiness = inputs[4].value;
+        const industryType = selects[0].value;
+        
+        if (!firmName || !email || !industryType || !phone || !location || !yearsInBusiness) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        const messageDiv = document.getElementById('registrationMessage');
+        messageDiv.classList.remove('hidden');
+        messageDiv.innerHTML = `
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Firm registration submitted successfully!</p>
+                <p class="text-sm mt-1">Welcome ${firmName}! We'll verify your information and contact you at ${email} to get started.</p>
+            </div>
+        `;
+        
+        form.reset();
+        
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>

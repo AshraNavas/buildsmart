@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuildSmart – The Complete Construction Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FDFCF8",
+                        foreground: "#2C2C24",
+                        primary: "#5D7052",
+                        secondary: "#C18C5D",
+                        accent: "#E6DCCD",
+                        muted: "#F0EBE5",
+                        border: "#DED8CF",
+                    },
+                    fontFamily: {
+                        heading: ["Fraunces", "serif"],
+                        body: ["Nunito", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; z-index: 0;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #5D7052; border-radius: 10px; }
+    </style>
+</head>
+
+<body class="bg-background text-foreground font-body relative">
+
+<nav class="sticky top-4 z-50 max-w-6xl mx-auto bg-white/70 backdrop-blur-md rounded-full border border-border/50 shadow-lg px-6 py-3 flex justify-between items-center mt-4">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-80">
+        <div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">B</div>
+        <span class="font-heading font-bold text-lg">BuildSmart</span>
+    </a>
+    <div class="hidden md:flex gap-6 text-sm font-semibold text-primary">
+        <a href="find-pros.html" class="hover:underline">Find Pros</a>
+        <a href="roadmap.html" class="hover:underline">Roadmap</a>
+        <a href="materials.html" class="hover:underline">Materials</a>
+        <a href="professionals.html" class="hover:underline">Professionals</a>
+        <a href="team-dashboard.html" class="hover:underline">Team</a>
+        <a href="join-network.html" class="hover:underline">Join Network</a>
+    </div>
+</nav>
+
+<section class="py-20 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl font-bold leading-tight mb-6">Every Pro for Every Phase.</h1>
+        <p class="text-lg text-gray-600 mb-10">The central hub for builders to connect with architects, electricians, and interior designers.</p>
+    </div>
+</section>
+
+<section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="font-heading text-4xl font-bold mb-12 text-center">What We Offer</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Find Pros -->
+            <div class="bg-white p-8 rounded-2xl border border-border/50 shadow-lg hover:shadow-xl transition-all">
+                <div class="text-5xl mb-4">👷</div>
+                <h3 class="font-heading text-2xl font-bold mb-3">Find Pros</h3>
+                <p class="text-gray-600 mb-6">Connect with architects, electricians, plumbers, and interior designers in your area.</p>
+                <a href="find-pros.html" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">Browse Professionals</a>
+            </div>
+
+            <!-- Construction Roadmap -->
+            <div class="bg-white p-8 rounded-2xl border border-border/50 shadow-lg hover:shadow-xl transition-all">
+                <div class="text-5xl mb-4">🗺️</div>
+                <h3 class="font-heading text-2xl font-bold mb-3">Construction Roadmap</h3>
+                <p class="text-gray-600 mb-6">Follow the step-by-step guide through each construction phase from design to completion.</p>
+                <a href="roadmap.html" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">View Roadmap</a>
+            </div>
+
+            <!-- Building Materials -->
+            <div class="bg-white p-8 rounded-2xl border border-border/50 shadow-lg hover:shadow-xl transition-all">
+                <div class="text-5xl mb-4">🏗️</div>
+                <h3 class="font-heading text-2xl font-bold mb-3">Building Materials</h3>
+                <p class="text-gray-600 mb-6">Browse prices and suppliers for all materials needed to build your dream home.</p>
+                <a href="materials.html" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">Shop Materials</a>
+            </div>
+
+            <!-- Professionals Directory -->
+            <div class="bg-white p-8 rounded-2xl border border-border/50 shadow-lg hover:shadow-xl transition-all">
+                <div class="text-5xl mb-4">👥</div>
+                <h3 class="font-heading text-2xl font-bold mb-3">Professional Directory</h3>
+                <p class="text-gray-600 mb-6">Discover skilled electricians, plumbers, carpenters, designers and other trade professionals.</p>
+                <a href="professionals.html" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">Browse Directory</a>
+            </div>
+
+            <!-- Team Dashboard -->
+            <div class="bg-white p-8 rounded-2xl border border-border/50 shadow-lg hover:shadow-xl transition-all">
+                <div class="text-5xl mb-4">🏢</div>
+                <h3 class="font-heading text-2xl font-bold mb-3">Our Team</h3>
+                <p class="text-gray-600 mb-6">Meet the BuildSmart team of engineers, designers, and project managers driving innovation.</p>
+                <a href="team-dashboard.html" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">Meet The Team</a>
+            </div>
+
+            <!-- Join Network -->
+            <div class="bg-white p-8 rounded-2xl border border-border/50 shadow-lg hover:shadow-xl transition-all">
+                <div class="text-5xl mb-4">🚀</div>
+                <h3 class="font-heading text-2xl font-bold mb-3">Join Our Network</h3>
+                <p class="text-gray-600 mb-6">Are you a professional? Register as an engineer, electrician, plumber, or add your firm.</p>
+                <a href="join-network.html" class="inline-block bg-secondary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 bg-primary text-white text-center">
+    <p>© 2026 BuildSmart Hub • Supporting the Hands that Build.</p>
+</footer>
+
+</body>
+</html>
