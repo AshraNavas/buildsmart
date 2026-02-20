@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuildSmart – The Complete Construction Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FDFCF8",
+                        foreground: "#2C2C24",
+                        primary: "#5D7052",
+                        secondary: "#C18C5D",
+                        accent: "#E6DCCD",
+                        muted: "#F0EBE5",
+                        border: "#DED8CF",
+                    },
+                    fontFamily: {
+                        heading: ["Fraunces", "serif"],
+                        body: ["Nunito", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; z-index: 0;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #5D7052; border-radius: 10px; }
+    </style>
+</head>
+
+<body class="bg-background text-foreground font-body relative">
+
+<nav class="sticky top-4 z-50 max-w-6xl mx-auto bg-white/70 backdrop-blur-md rounded-full border border-border/50 shadow-lg px-6 py-3 flex justify-between items-center mt-4">
+    <div class="flex items-center gap-3">
+        <div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">B</div>
+        <span class="font-heading font-bold text-lg">BuildSmart</span>
+    </div>
+    <div class="hidden md:flex gap-6 text-sm font-semibold text-primary">
+        <a href="#directory" class="hover:underline">Find Pros</a>
+        <a href="#roadmap" class="hover:underline">Construction Roadmap</a>
+        <a href="#materials" class="hover:underline">Materials</a>
+        <a href="#professionals" class="hover:underline">Professionals</a>
+        <a href="#enrollment" class="hover:underline">Join Network</a>
+    </div>
+</nav>
+
+<section class="py-20 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl font-bold leading-tight mb-6">Every Pro for Every Phase.</h1>
+        <p class="text-lg text-gray-600 mb-10">The central hub for builders to connect with architects, electricians, and interior designers.</p>
+    </div>
+</section>
+
+<section id="directory" class="py-16 px-6 bg-muted/30">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row gap-4 mb-12 justify-center">
+            <input type="text" id="citySearch" placeholder="Enter City (e.g. Austin)" class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-64 focus:ring-2 ring-primary/20"/>
+            <select id="proType" class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-64">
+                <option value="All">All Professionals</option>
+                <option value="Architect">Architects</option>
+                <option value="Electrician">Electricians</option>
+                <option value="Interior Designer">Interior Designers</option>
+                <option value="Plumber">Plumbers</option>
+            </select>
+            <button onclick="filterPros()" class="bg-primary text-white rounded-full px-10 h-12 font-semibold hover:bg-opacity-90 transition">Filter Results</button>
+        </div>
+
+        <div id="proGrid" class="grid md:grid-cols-3 gap-8">
+            </div>
+    </div>
+</section>
+
+<section id="roadmap" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="font-heading text-4xl font-bold mb-12 text-center">The Builder's Roadmap</h2>
+        <div class="space-y-8">
+            <div class="flex gap-6 p-6 bg-white border border-border rounded-2xl shadow-sm">
+                <div class="text-3xl font-heading text-secondary font-bold">01</div>
+                <div>
+                    <h3 class="font-bold text-xl mb-2">Pre-Construction & Design</h3>
+                    <p class="text-gray-600">Secure permits, land surveys, and hire your <b>Architect</b> for blueprints.</p>
+                </div>
+            </div>
+            <div class="flex gap-6 p-6 bg-white border border-border rounded-2xl shadow-sm">
+                <div class="text-3xl font-heading text-secondary font-bold">02</div>
+                <div>
+                    <h3 class="font-bold text-xl mb-2">Foundation & Framing</h3>
+                    <p class="text-gray-600">Excavation and skeleton construction. You'll need <b>Structural Engineers</b> and <b>Lumber Suppliers</b>.</p>
+                </div>
+            </div>
+            <div class="flex gap-6 p-6 bg-white border border-border rounded-2xl shadow-sm">
+                <div class="text-3xl font-heading text-secondary font-bold">03</div>
+                <div>
+                    <h3 class="font-bold text-xl mb-2">Rough-In (Systems)</h3>
+                    <p class="text-gray-600">The "guts" of the building. Time to call the <b>Electricians</b> and <b>Plumbers</b>.</p>
+                </div>
+            </div>
+            <div class="flex gap-6 p-6 bg-white border border-border rounded-2xl shadow-sm">
+                <div class="text-3xl font-heading text-secondary font-bold">04</div>
+                <div>
+                    <h3 class="font-bold text-xl mb-2">Interior & Finish</h3>
+                    <p class="text-gray-600">Drywall, flooring, and paint. Connect with <b>Interior Designers</b> and <b>Cabinet Makers</b>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="materials" class="py-20 px-6 bg-muted/20">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="font-heading text-4xl font-bold mb-4 text-center">Building Materials & Products</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Everything you need to build your dream home</p>
+        
+        <div class="flex flex-col md:flex-row gap-4 mb-12 justify-center">
+            <input type="text" id="productSearch" placeholder="Search products..." class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-80 focus:ring-2 ring-primary/20"/>
+            <select id="categoryFilter" class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-64">
+                <option value="All">All Categories</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Framing">Framing & Structure</option>
+                <option value="Roofing">Roofing Materials</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Plumbing">Plumbing</option>
+                <option value="HVAC">HVAC & Ventilation</option>
+                <option value="Insulation">Insulation</option>
+                <option value="Flooring">Flooring</option>
+                <option value="Interior">Interior Finishing</option>
+                <option value="Paint">Paint & Coatings</option>
+                <option value="Decorating">Decorating & Decor</option>
+                <option value="Tools">Painting Tools</option>
+            </select>
+            <button onclick="filterProducts()" class="bg-primary text-white rounded-full px-10 h-12 font-semibold hover:bg-opacity-90 transition">Search</button>
+        </div>
+
+        <div id="productsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+    </div>
+</section>
+
+<section id="dashboard" class="py-20 px-6 bg-white/50">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="font-heading text-4xl font-bold mb-4 text-center">Our Team Dashboard</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Meet the talented professionals driving BuildSmart forward</p>
+        
+        <div class="flex flex-col md:flex-row gap-4 mb-12 justify-center">
+            <input type="text" id="teamSearch" placeholder="Search team members..." class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-80 focus:ring-2 ring-primary/20"/>
+            <select id="roleFilter" class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-64">
+                <option value="All">All Roles</option>
+                <option value="Product Engineer">Product Engineers</option>
+                <option value="UX Designer">UX Designers</option>
+                <option value="Backend Engineer">Backend Engineers</option>
+                <option value="Frontend Engineer">Frontend Engineers</option>
+                <option value="DevOps Engineer">DevOps Engineers</option>
+                <option value="Project Manager">Project Managers</option>
+            </select>
+            <button onclick="filterTeam()" class="bg-primary text-white rounded-full px-10 h-12 font-semibold hover:bg-opacity-90 transition">Search</button>
+        </div>
+
+        <div id="teamGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+    </div>
+</section>
+
+<section id="enrollment" class="py-20 px-6 bg-gradient-to-b from-accent/20 to-muted/30">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="font-heading text-4xl font-bold mb-4 text-center">Join Our Network</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Register as an engineer or add your firm to connect with builders and professionals</p>
+        
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Engineer Registration -->
+            <div class="flex-1 bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+                <h3 class="font-heading text-2xl font-bold mb-6 text-primary">Engineer Registration</h3>
+                <form onsubmit="registerEngineer(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Full Name</label>
+                        <input type="text" required placeholder="John Doe" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email Address</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Specialization</label>
+                        <select required class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20">
+                            <option value="">Select Your Profession</option>
+                            <option value="Structural Engineer">Structural Engineer</option>
+                            <option value="Civil Engineer">Civil Engineer</option>
+                            <option value="Electrical Engineer">Electrical Engineer</option>
+                            <option value="Mechanical Engineer">Mechanical Engineer</option>
+                            <option value="HVAC Engineer">HVAC Engineer</option>
+                            <option value="Plumbing Engineer">Plumbing Engineer</option>
+                            <option value="Project Engineer">Project Engineer</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="HVAC Technician">HVAC Technician</option>
+                            <option value="Carpenter">Carpenter</option>
+                            <option value="Welder">Welder</option>
+                            <option value="Interior Designer">Interior Designer</option>
+                            <option value="Architect">Architect</option>
+                            <option value="Landscape Designer">Landscape Designer</option>
+                            <option value="Tile Setter">Tile Setter</option>
+                            <option value="Painter">Painter</option>
+                            <option value="Drywall Installer">Drywall Installer</option>
+                            <option value="Roofing Specialist">Roofing Specialist</option>
+                            <option value="Foundation Specialist">Foundation Specialist</option>
+                            <option value="General Contractor">General Contractor</option>
+                            <option value="Foreman">Foreman</option>
+                            <option value="Safety Inspector">Safety Inspector</option>
+                            <option value="Building Inspector">Building Inspector</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Phone Number</label>
+                        <input type="tel" required placeholder="+1 555-0000" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">City/Location</label>
+                        <input type="text" required placeholder="Austin, TX" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Years of Experience</label>
+                        <input type="number" required placeholder="5" min="0" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Certifications/License</label>
+                        <textarea placeholder="PE License #12345, LEED Certified..." class="w-full px-4 py-2 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white rounded-lg px-6 py-3 font-bold hover:bg-opacity-90 transition">Register as Engineer</button>
+                </form>
+            </div>
+
+            <!-- Firm Registration -->
+            <div class="flex-1 bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+                <h3 class="font-heading text-2xl font-bold mb-6 text-secondary">Add Your Firm</h3>
+                <form onsubmit="registerFirm(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Firm Name</label>
+                        <input type="text" required placeholder="BuildRight Engineering" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Contact Email</label>
+                        <input type="email" required placeholder="contact@firm.com" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Industry Type</label>
+                        <select required class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20">
+                            <option value="">Select Industry</option>
+                            <option value="Architecture">Architecture Firm</option>
+                            <option value="Engineering">Engineering Firm</option>
+                            <option value="Construction">Construction Company</option>
+                            <option value="Electrical">Electrical Contractor</option>
+                            <option value="Plumbing">Plumbing Contractor</option>
+                            <option value="HVAC">HVAC Contractor</option>
+                            <option value="Interior Design">Interior Design Firm</option>
+                            <option value="Materials">Building Materials Supplier</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Phone Number</label>
+                        <input type="tel" required placeholder="+1 555-0000" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Headquarters Location</label>
+                        <input type="text" required placeholder="Austin, TX" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Years in Business</label>
+                        <input type="number" required placeholder="10" min="0" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Website (Optional)</label>
+                        <input type="url" placeholder="https://yourfirm.com" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+                    <button type="submit" class="w-full bg-secondary text-white rounded-lg px-6 py-3 font-bold hover:bg-opacity-90 transition">Register Firm</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="registrationMessage" class="mt-8 text-center hidden">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Registration submitted successfully!</p>
+                <p class="text-sm mt-1">We'll review your information and contact you soon.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="professionals" class="py-20 px-6 bg-muted/20">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="font-heading text-4xl font-bold mb-4 text-center">Professional Directory</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Browse and connect with skilled professionals in your area</p>
+        
+        <div class="flex flex-col md:flex-row gap-4 mb-12 justify-center">
+            <input type="text" id="profSearch" placeholder="Search professionals..." class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-80 focus:ring-2 ring-primary/20"/>
+            <select id="professionFilter" class="h-12 px-6 rounded-full border border-border bg-white outline-none w-full md:w-64">
+                <option value="All">All Professions</option>
+                <option value="Electrician">Electricians</option>
+                <option value="Plumber">Plumbers</option>
+                <option value="Interior Designer">Interior Designers</option>
+                <option value="Architect">Architects</option>
+                <option value="Carpenter">Carpenters</option>
+                <option value="HVAC Technician">HVAC Technicians</option>
+                <option value="Painter">Painters</option>
+                <option value="Roofing Specialist">Roofing Specialists</option>
+                <option value="General Contractor">General Contractors</option>
+                <option value="Structural Engineer">Structural Engineers</option>
+            </select>
+            <button onclick="filterProfessionals()" class="bg-primary text-white rounded-full px-10 h-12 font-semibold hover:bg-opacity-90 transition">Search</button>
+        </div>
+
+        <div id="professionalsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+    </div>
+</section>
+
+<footer class="py-12 bg-primary text-white text-center">
+    <p>© 2026 BuildSmart Hub • Supporting the Hands that Build.</p>
+</footer>
+
+<script>
+    const companies = [
+        { name: "ArchiTech Studio", type: "Architect", city: "Austin", contact: "+1 555-0101", rating: "4.9" },
+        { name: "Sparky & Co.", type: "Electrician", city: "Austin", contact: "+1 555-0202", rating: "4.8" },
+        { name: "Elegance Interiors", type: "Interior Designer", city: "New York", contact: "+1 555-0303", rating: "5.0" },
+        { name: "Blue Pipe Pros", type: "Plumber", city: "Houston", contact: "+1 555-0404", rating: "4.7" },
+        { name: "Modern Drafts", type: "Architect", city: "New York", contact: "+1 555-0505", rating: "4.6" }
+    ];
+
+    let professionals = [
+        { name: "John Smith", profession: "Electrician", city: "Austin", email: "john@email.com", experience: "8 years", avatar: "⚡" },
+        { name: "Maria Garcia", profession: "Plumber", city: "Houston", email: "maria@email.com", experience: "10 years", avatar: "🚰" },
+        { name: "Alex Johnson", profession: "Interior Designer", city: "New York", email: "alex@email.com", experience: "6 years", avatar: "🎨" },
+        { name: "Sarah Williams", profession: "Carpenter", city: "Austin", email: "sarah@email.com", experience: "12 years", avatar: "🪵" },
+        { name: "David Brown", profession: "HVAC Technician", city: "Dallas", email: "david@email.com", experience: "9 years", avatar: "❄️" },
+        { name: "Emma Davis", profession: "Architect", city: "Los Angeles", email: "emma@email.com", experience: "7 years", avatar: "🏗️" },
+        { name: "Michael Chen", profession: "Painter", city: "San Francisco", email: "michael@email.com", experience: "5 years", avatar: "🎨" },
+        { name: "Jessica Lee", profession: "Roofing Specialist", city: "Phoenix", email: "jessica@email.com", experience: "8 years", avatar: "🏠" },
+        { name: "Robert Martinez", profession: "General Contractor", city: "Miami", email: "robert@email.com", experience: "15 years", avatar: "👷" },
+        { name: "Lisa Anderson", profession: "Structural Engineer", city: "Chicago", email: "lisa@email.com", experience: "11 years", avatar: "📐" }
+    ];
+
+    const teamMembers = [
+        { name: "Sarah Chen", role: "Product Engineer", email: "sarah@buildsmart.com", avatar: "👩‍💼", specialty: "Full-stack solutions" },
+        { name: "James Wilson", role: "UX Designer", email: "james@buildsmart.com", avatar: "👨‍🎨", specialty: "User experience design" },
+        { name: "Maya Patel", role: "Backend Engineer", email: "maya@buildsmart.com", avatar: "👩‍💻", specialty: "Database architecture" },
+        { name: "David Rodriguez", role: "Frontend Engineer", email: "david@buildsmart.com", avatar: "👨‍💻", specialty: "React & Web dev" },
+        { name: "Emma Johnson", role: "DevOps Engineer", email: "emma@buildsmart.com", avatar: "👩‍🔧", specialty: "Cloud infrastructure" },
+        { name: "Ahmed Hassan", role: "Project Manager", email: "ahmed@buildsmart.com", avatar: "👨‍💼", specialty: "Agile methodology" },
+        { name: "Lisa Thompson", role: "UX Designer", email: "lisa@buildsmart.com", avatar: "👩‍🎨", specialty: "Interaction design" },
+        { name: "Marcus Lee", role: "Backend Engineer", email: "marcus@buildsmart.com", avatar: "👨‍💻", specialty: "System design" },
+        { name: "Nina Okonkwo", role: "Frontend Engineer", email: "nina@buildsmart.com", avatar: "👩‍💻", specialty: "Performance optimization" },
+        { name: "Chris Murphy", role: "Product Engineer", email: "chris@buildsmart.com", avatar: "👨‍💼", specialty: "API development" },
+        { name: "Rachel Green", role: "DevOps Engineer", email: "rachel@buildsmart.com", avatar: "👩‍🔧", specialty: "CI/CD pipelines" },
+        { name: "Tom Bradley", role: "Project Manager", email: "tom@buildsmart.com", avatar: "👨‍💼", specialty: "Stakeholder management" }
+    ];
+
+    const buildingProducts = [
+        // Foundation
+        { name: "Concrete (Cubic Yard)", category: "Foundation", price: "$150-180", description: "Ready-mix concrete for foundations", supplier: "BuildRight Supplies", icon: "🏗️" },
+        { name: "Rebar Steel", category: "Foundation", price: "$0.50-0.80/lb", description: "Reinforcement steel for concrete", supplier: "Steel Supply Co", icon: "⚙️" },
+        { name: "Foundation Sealant", category: "Foundation", price: "$30-50", description: "Waterproof sealant for foundations", supplier: "Sealant Pro", icon: "🔧" },
+        { name: "Gravel & Drainage Stone", category: "Foundation", price: "$40-60/ton", description: "Drainage layers for foundation", supplier: "Stone Depot", icon: "🪨" },
+        
+        // Framing & Structure
+        { name: "2x4 Lumber (per 8ft)", category: "Framing", price: "$8-12", description: "Standard framing lumber", supplier: "Timber House", icon: "🪵" },
+        { name: "2x10 Floor Joists", category: "Framing", price: "$15-20", description: "Floor support beams", supplier: "Lumber Mill", icon: "🪵" },
+        { name: "Roof Trusses (per truss)", category: "Framing", price: "$50-80", description: "Pre-built roof support", supplier: "Truss Factory", icon: "📐" },
+        { name: "Structural Steel Beams", category: "Framing", price: "$1200-2000", description: "Heavy support beams", supplier: "Steel Works", icon: "📏" },
+        
+        // Roofing
+        { name: "Asphalt Shingles (per bundle)", category: "Roofing", price: "$30-50", description: "Standard roof shingles", supplier: "Roof Masters", icon: "🏠" },
+        { name: "Metal Roofing (per sq ft)", category: "Roofing", price: "$8-15", description: "Durable metal roof panels", supplier: "MetalRoof Inc", icon: "🔩" },
+        { name: "Roof Underlayment", category: "Roofing", price: "$0.80-1.50/sq ft", description: "Moisture barrier layer", supplier: "Underlayment Co", icon: "📋" },
+        { name: "Gutters & Downspouts", category: "Roofing", price: "$5-10/ft", description: "Drainage system for roof", supplier: "Gutter Masters", icon: "🌧️" },
+        
+        // Electrical
+        { name: "Electrical Wire (per 250ft roll)", category: "Electrical", price: "$40-70", description: "Copper wiring", supplier: "ElectroSupply", icon: "⚡" },
+        { name: "Circuit Breaker Box", category: "Electrical", price: "$150-300", description: "Main electrical panel", supplier: "ElectroSmart", icon: "🔌" },
+        { name: "In-Wall Outlets", category: "Electrical", price: "$2-5", description: "Electrical receptacles", supplier: "PowerPlus", icon: "🔌" },
+        { name: "Light Switches", category: "Electrical", price: "$3-8", description: "Standard light switches", supplier: "SwitchHub", icon: "💡" },
+        { name: "Electrical Conduit", category: "Electrical", price: "$0.50-1.50/ft", description: "Protective wire casing", supplier: "ConduitPro", icon: "🔧" },
+        
+        // Plumbing
+        { name: "PVC Pipes (10ft)", category: "Plumbing", price: "$15-30", description: "Plastic water/waste pipes", supplier: "PipeWorks", icon: "🚰" },
+        { name: "Copper Tubing (10ft)", category: "Plumbing", price: "$40-80", description: "Premium water lines", supplier: "CopperSupply", icon: "🚰" },
+        { name: "Toilets", category: "Plumbing", price: "$150-400", description: "Standard bathroom toilets", supplier: "PorcelaMax", icon: "🚽" },
+        { name: "Sinks & Faucets", category: "Plumbing", price: "$100-500", description: "Kitchen and bathroom sinks", supplier: "FaucetWorld", icon: "🚿" },
+        { name: "Water Heater", category: "Plumbing", price: "$800-1500", description: "Electric or gas heated water", supplier: "HeatFlow", icon: "🔥" },
+        
+        // HVAC
+        { name: "HVAC Unit (Central AC)", category: "HVAC", price: "$2500-5000", description: "Air conditioning system", supplier: "CoolComfort", icon: "❄️" },
+        { name: "Ductwork", category: "HVAC", price: "$1-3/ft", description: "Air distribution system", supplier: "DuctMasters", icon: "🌬️" },
+        { name: "Thermostat", category: "HVAC", price: "$50-300", description: "Temperature control system", supplier: "ThermoTech", icon: "🌡️" },
+        { name: "Air Filters", category: "HVAC", price: "$15-40", description: "HVAC replacement filters", supplier: "FilterPro", icon: "💨" },
+        
+        // Insulation
+        { name: "Fiberglass Batts (per 100 sq ft)", category: "Insulation", price: "$30-60", description: "Wall and attic insulation", supplier: "InsulateRight", icon: "🧊" },
+        { name: "Spray Foam", category: "Insulation", price: "$1-2/sq ft", description: "Expanding foam insulation", supplier: "FoamTech", icon: "☁️" },
+        { name: "Blown-in Cellulose", category: "Insulation", price: "$0.80-1.50/sq ft", description: "Attic insulation", supplier: "CelluPro", icon: "💫" },
+        
+        // Flooring
+        { name: "Hardwood Flooring (sq ft)", category: "Flooring", price: "$5-15", description: "Premium wood floors", supplier: "WoodFloors Inc", icon: "🪵" },
+        { name: "Ceramic Tiles", category: "Flooring", price: "$2-8/sq ft", description: "Bathroom and kitchen tiles", supplier: "TileMax", icon: "🔲" },
+        { name: "Laminate Flooring", category: "Flooring", price: "$1.50-4/sq ft", description: "Budget-friendly flooring", supplier: "LaminateLand", icon: "📦" },
+        { name: "Vinyl Planks (LVP)", category: "Flooring", price: "$2-6/sq ft", description: "Waterproof vinyl flooring", supplier: "VinylPro", icon: "🪨" },
+        
+        // Interior Finishing
+        { name: "Drywall Sheets", category: "Interior", price: "$15-20", description: "4x8 drywall panels", supplier: "DrywallPro", icon: "📋" },
+        { name: "Joint Compound (bucket)", category: "Interior", price: "$15-25", description: "Drywall finishing compound", supplier: "CompoundPro", icon: "🪣" },
+        { name: "Cabinet Hardware", category: "Interior", price: "$5-30", description: "Handles and hinges", supplier: "CabinetParts", icon: "🚪" },
+        { name: "Interior Doors", category: "Interior", price: "$100-400", description: "Pre-hung interior doors", supplier: "DoorMasters", icon: "🚪" },
+        
+        // Paint & Coatings
+        { name: "Interior Paint (gallon)", category: "Paint", price: "$25-45", description: "Interior wall paint", supplier: "ColorWorks", icon: "🎨" },
+        { name: "Exterior Paint (gallon)", category: "Paint", price: "$35-60", description: "Weather-resistant paint", supplier: "WeatherShield", icon: "🎨" },
+        { name: "Primer", category: "Paint", price: "$20-35", description: "Surface preparation primer", supplier: "PrimerPro", icon: "🎨" },
+        { name: "Stain & Sealant", category: "Paint", price: "$30-50", description: "Wood stain and finish", supplier: "StainMasters", icon: "🎨" },
+        { name: "Semi-Gloss Paint (gallon)", category: "Paint", price: "$28-48", description: "Durable finish for kitchens & baths", supplier: "GlossCoat", icon: "🎨" },
+        { name: "Matte Finish Paint (gallon)", category: "Paint", price: "$25-45", description: "Low-sheen interior paint", supplier: "MattePro", icon: "🎨" },
+        { name: "Textured Finish Paint (gallon)", category: "Paint", price: "$30-50", description: "Creates textured wall finish", supplier: "TextureMasters", icon: "🎨" },
+        { name: "Oil-Based Paint (gallon)", category: "Paint", price: "$35-55", description: "Professional-grade oil paint", supplier: "OilWorks", icon: "🎨" },
+        { name: "Epoxy Paint (gallon)", category: "Paint", price: "$40-70", description: "Durable garage and floor paint", supplier: "EpoxyPro", icon: "🎨" },
+        { name: "Anti-Mold Paint (gallon)", category: "Paint", price: "$35-55", description: "Moisture-resistant paint", supplier: "MoldBlock", icon: "🎨" },
+        { name: "Paint Color Samples", category: "Paint", price: "$5-10", description: "Test paint colors", supplier: "ColorSamples", icon: "🎨" },
+        { name: "Color Matching Service", category: "Paint", price: "Free-25", description: "Professional color matching", supplier: "ChromaMatch", icon: "🎯" },
+        
+        // Painting Tools
+        { name: "Paint Brush Set", category: "Tools", price: "$15-30", description: "Professional grade brushes", supplier: "BrushPro", icon: "🖌️" },
+        { name: "Paint Roller Kit", category: "Tools", price: "$20-40", description: "Roller, handle & tray set", supplier: "RollerMasters", icon: "🎨" },
+        { name: "Paint Roller Covers", category: "Tools", price: "$3-8", description: "Replacement roller covers", supplier: "CoverPro", icon: "🔄" },
+        { name: "Paint Tray", category: "Tools", price: "$5-10", description: "Standard paint tray", supplier: "TrayPro", icon: "🪣" },
+        { name: "Drop Cloth", category: "Tools", price: "$8-15", description: "Protective floor covering", supplier: "ProtectPro", icon: "📦" },
+        { name: "Painter's Tape", category: "Tools", price: "$4-8/roll", description: "Precision masking tape", supplier: "TapeMaster", icon: "📛" },
+        { name: "Paint Sprayer", category: "Tools", price: "$150-400", description: "HVLP spray painting system", supplier: "SprayPro", icon: "💨" },
+        { name: "Paint Thinner & Cleaner", category: "Tools", price: "$10-20", description: "Brush and tool cleaner", supplier: "CleanPro", icon: "🧼" },
+        { name: "Caulking Gun", category: "Tools", price: "$8-15", description: "For applying caulk and sealant", supplier: "CaulkMaster", icon: "🔫" },
+        { name: "Sanding Sponges", category: "Tools", price: "$5-12/pack", description: "Sandpaper for prep work", supplier: "SandPro", icon: "🧽" },
+        { name: "Paint Mixing Drill Bit", category: "Tools", price: "$10-20", description: "For mixing paint in bucket", supplier: "MixerPro", icon: "⚙️" },
+        { name: "Extension Poles", category: "Tools", price: "$15-30", description: "Adjustable ceiling poles", supplier: "PolePro", icon: "📏" },
+        
+        // Decorating & Decor
+        { name: "Wallpaper (roll)", category: "Decorating", price: "$15-50", description: "Decorative wall covering", supplier: "WallArt Co", icon: "🖼️" },
+        { name: "Peel & Stick Wallpaper", category: "Decorating", price: "$20-40", description: "Removable wall decals", supplier: "StickDecor", icon: "👁️" },
+        { name: "Wall Paneling", category: "Decorating", price: "$3-8/sq ft", description: "Wood or vinyl wall panels", supplier: "PanelWorks", icon: "📦" },
+        { name: "Wainscoting", category: "Decorating", price: "$2-6/sq ft", description: "Decorative wall cladding", supplier: "WainscotPro", icon: "🏠" },
+        { name: "Crown Molding", category: "Decorating", price: "$1-4/ft", description: "Decorative ceiling trim", supplier: "MoldingMasters", icon: "👑" },
+        { name: "Wall Trim & Baseboards", category: "Decorating", price: "$1-3/ft", description: "Decorative wall edging", supplier: "TrimPro", icon: "🪵" },
+        { name: "Decorative Wall Shelves", category: "Decorating", price: "$30-100", description: "Display shelving units", supplier: "ShelfDesigns", icon: "📚" },
+        { name: "Wall Mirrors", category: "Decorating", price: "$50-300", description: "Decorative mirrors for walls", supplier: "MirrorArt", icon: "🪞" },
+        { name: "Picture Rail & Hooks", category: "Decorating", price: "$20-50", description: "Adjustable picture hanging system", supplier: "PictureHang", icon: "🖼️" },
+        { name: "Accent Wall Stickers", category: "Decorating", price: "$10-30", description: "Removable wall art decals", supplier: "ArtStick", icon: "⭐" },
+        { name: "Tile Decals & Stickers", category: "Decorating", price: "$15-40", description: "Decorative tile covers", supplier: "TileArt", icon: "🔲" },
+        { name: "Ceiling Medallions", category: "Decorating", price: "$40-150", description: "Ornamental ceiling accents", supplier: "CelingArt", icon: "🌟" },
+        { name: "Decorative Lighting Fixtures", category: "Decorating", price: "$50-500", description: "Designer light fixtures", supplier: "LuxeLights", icon: "💡" },
+        { name: "Chandeliers", category: "Decorating", price: "$100-1000", description: "Elegant hanging chandeliers", supplier: "EliteLux", icon: "✨" },
+        { name: "Wall Sconces", category: "Decorating", price: "$40-200", description: "Side wall lighting", supplier: "SconceArt", icon: "🕯️" },
+        { name: "Pendant Lights", category: "Decorating", price: "$30-150", description: "Hanging decorative lights", supplier: "PendantPro", icon: "💫" },
+        { name: "Decorative Hardware", category: "Decorating", price: "$10-50", description: "Cabinet & door hardware", supplier: "HardwareArt", icon: "🔧" },
+        { name: "Window Treatments (curtains)", category: "Decorating", price: "$40-200", description: "Decorative curtains & drapes", supplier: "CurtainPro", icon: "🪟" }
+    ];
+
+    function displayPros(data) {
+        const grid = document.getElementById('proGrid');
+        grid.innerHTML = data.map(pro => `
+            <div class="bg-white p-8 rounded-[2rem] border border-border/50 shadow-md hover:shadow-xl transition-all">
+                <span class="text-xs font-bold uppercase tracking-widest text-secondary">${pro.type}</span>
+                <h3 class="font-heading text-2xl font-bold mt-2">${pro.name}</h3>
+                <p class="text-gray-500 mb-4">📍 ${pro.city}</p>
+                <div class="flex justify-between items-center mt-6">
+                    <span class="font-bold text-primary">${pro.rating} ★</span>
+                    <a href="tel:${pro.contact}" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold">Call Now</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterPros() {
+        const city = document.getElementById('citySearch').value.toLowerCase();
+        const type = document.getElementById('proType').value;
+        
+        const filtered = companies.filter(pro => {
+            const matchesCity = pro.city.toLowerCase().includes(city);
+            const matchesType = type === "All" || pro.type === type;
+            return matchesCity && matchesType;
+        });
+        
+        displayPros(filtered);
+    }
+
+    function displayTeam(data) {
+        const grid = document.getElementById('teamGrid');
+        grid.innerHTML = data.map(member => `
+            <div class="bg-gradient-to-br from-white to-muted/20 p-8 rounded-2xl border border-border/50 shadow-md hover:shadow-xl transition-all hover:border-secondary/50">
+                <div class="text-5xl mb-4">${member.avatar}</div>
+                <h3 class="font-heading text-2xl font-bold mb-1">${member.name}</h3>
+                <p class="text-secondary font-semibold text-sm uppercase tracking-wider mb-3">${member.role}</p>
+                <p class="text-gray-600 text-sm mb-4">${member.specialty}</p>
+                <div class="flex items-center gap-2 text-sm">
+                    <span class="text-gray-500">📧</span>
+                    <a href="mailto:${member.email}" class="text-primary hover:underline">${member.email}</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterTeam() {
+        const search = document.getElementById('teamSearch').value.toLowerCase();
+        const role = document.getElementById('roleFilter').value;
+        
+        const filtered = teamMembers.filter(member => {
+            const matchesSearch = member.name.toLowerCase().includes(search) || member.specialty.toLowerCase().includes(search);
+            const matchesRole = role === "All" || member.role === role;
+            return matchesSearch && matchesRole;
+        });
+        
+        displayTeam(filtered);
+    }
+
+    function displayProducts(data) {
+        const grid = document.getElementById('productsGrid');
+        grid.innerHTML = data.map(product => `
+            <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md hover:shadow-xl transition-all">
+                <div class="text-4xl mb-3">${product.icon}</div>
+                <h3 class="font-heading text-xl font-bold mb-1">${product.name}</h3>
+                <p class="text-secondary font-semibold text-xs uppercase tracking-wider mb-2">${product.category}</p>
+                <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+                <div class="border-t border-border pt-3">
+                    <p class="text-xs text-gray-500 mb-2">Supplier: <span class="font-semibold">${product.supplier}</span></p>
+                    <p class="text-lg font-bold text-primary">${product.price}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterProducts() {
+        const search = document.getElementById('productSearch').value.toLowerCase();
+        const category = document.getElementById('categoryFilter').value;
+        
+        const filtered = buildingProducts.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(search) || product.description.toLowerCase().includes(search);
+            const matchesCategory = category === "All" || product.category === category;
+            return matchesSearch && matchesCategory;
+        });
+        
+        displayProducts(filtered);
+    }
+
+    function displayProfessionals(data) {
+        const grid = document.getElementById('professionalsGrid');
+        grid.innerHTML = data.map(prof => `
+            <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md hover:shadow-xl transition-all">
+                <div class="text-5xl mb-3">${prof.avatar}</div>
+                <h3 class="font-heading text-xl font-bold mb-1">${prof.name}</h3>
+                <p class="text-secondary font-semibold text-xs uppercase tracking-wider mb-2">${prof.profession}</p>
+                <p class="text-gray-600 text-sm mb-2">📍 ${prof.city}</p>
+                <p class="text-gray-500 text-xs mb-4">Experience: ${prof.experience}</p>
+                <div class="border-t border-border pt-3">
+                    <a href="mailto:${prof.email}" class="inline-block bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-opacity-90 transition">Contact Now</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterProfessionals() {
+        const search = document.getElementById('profSearch').value.toLowerCase();
+        const profession = document.getElementById('professionFilter').value;
+        
+        const filtered = professionals.filter(prof => {
+            const matchesSearch = prof.name.toLowerCase().includes(search) || prof.profession.toLowerCase().includes(search) || prof.city.toLowerCase().includes(search);
+            const matchesProfession = profession === "All" || prof.profession === profession;
+            return matchesSearch && matchesProfession;
+        });
+        
+        displayProfessionals(filtered);
+    }
+
+    // Initial Load
+    displayPros(companies);
+    displayTeam(teamMembers);
+    displayProducts(buildingProducts);
+    displayProfessionals(professionals);
+
+    // Registration Functions
+    function registerEngineer(event) {
+        event.preventDefault();
+        const form = event.target;
+        
+        // Get form values - select by position or use a more reliable method
+        const inputs = form.querySelectorAll('input');
+        const selects = form.querySelectorAll('select');
+        
+        const fullName = inputs[0].value; // Full Name
+        const email = inputs[1].value;    // Email
+        const specialization = selects[0].value;  // Specialization
+        const phone = inputs[2].value;    // Phone
+        const location = inputs[3].value; // City/Location
+        const experience = inputs[4].value; // Years of Experience
+        
+        // Simple validation
+        if (!fullName || !email || !specialization || !phone || !location || !experience) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        // Create new professional object
+        const professionAvatars = {
+            'Electrician': '⚡',
+            'Plumber': '🚰',
+            'Interior Designer': '🎨',
+            'Carpenter': '🪵',
+            'HVAC Technician': '❄️',
+            'Architect': '🏗️',
+            'Painter': '🎨',
+            'Roofing Specialist': '🏠',
+            'General Contractor': '👷',
+            'Structural Engineer': '📐',
+            'Civil Engineer': '🏗️',
+            'Electrical Engineer': '⚡',
+            'Mechanical Engineer': '⚙️',
+            'HVAC Engineer': '❄️',
+            'Plumbing Engineer': '🚰',
+            'Project Engineer': '📋',
+            'Welder': '🔥',
+            'Landscape Designer': '🌳',
+            'Tile Setter': '🔲',
+            'Drywall Installer': '📦',
+            'Foundation Specialist': '🏗️',
+            'Foreman': '👷',
+            'Safety Inspector': '🛡️',
+            'Building Inspector': '🔍'
+        };
+        
+        const newProfessional = {
+            name: fullName,
+            profession: specialization,
+            city: location,
+            email: email,
+            experience: experience + ' years',
+            avatar: professionAvatars[specialization] || '👨‍💼'
+        };
+        
+        // Add to professionals array
+        professionals.push(newProfessional);
+        
+        // Refresh the display
+        displayProfessionals(professionals);
+        
+        // Show success message
+        const messageDiv = document.getElementById('registrationMessage');
+        messageDiv.classList.remove('hidden');
+        messageDiv.innerHTML = `
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Registration submitted successfully!</p>
+                <p class="text-sm mt-1">Welcome ${fullName}! Your profile as a ${specialization} is now visible in our Professional Directory.</p>
+            </div>
+        `;
+        
+        // Reset form
+        form.reset();
+        
+        // Auto-hide message after 5 seconds
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 5000);
+        
+        // Scroll to professionals section
+        document.getElementById('professionals').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function registerFirm(event) {
+        event.preventDefault();
+        const form = event.target;
+        
+        // Get form values
+        const firmName = form.querySelector('input[placeholder="BuildRight Engineering"]').value;
+        const email = form.querySelector('input[type="email"]').value;
+        const industryType = form.querySelectorAll('select')[1].value;
+        const phone = form.querySelector('input[type="tel"]').value;
+        
+        // Simple validation
+        if (!firmName || !email || !industryType || !phone) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        // Show success message
+        const messageDiv = document.getElementById('registrationMessage');
+        messageDiv.classList.remove('hidden');
+        messageDiv.innerHTML = `
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Firm registration submitted successfully!</p>
+                <p class="text-sm mt-1">Welcome ${firmName}! We'll verify your information and contact you at ${email} to get started.</p>
+            </div>
+        `;
+        
+        // Reset form
+        form.reset();
+        
+        // Auto-hide message after 5 seconds
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>
