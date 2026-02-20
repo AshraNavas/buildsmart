@@ -50,6 +50,7 @@
         <a href="professionals.html" class="hover:underline">Professionals</a>
         <a href="team-dashboard.html" class="hover:underline">Team</a>
         <a href="join-network.html" class="hover:underline">Join Network</a>
+        <a href="feedback.html" class="hover:underline text-secondary font-bold">Feedback</a>
     </div>
 </nav>
 
@@ -58,6 +59,30 @@
         <h1 class="font-heading text-4xl font-bold mb-4 text-center">Join Our Network</h1>
         <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Register as an engineer, electrician, plumber, designer, or add your firm to connect with builders and professionals</p>
         
+        <!-- REGISTERED PROFESSIONALS DASHBOARD -->
+        <div class="mb-16 bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+            <h2 class="font-heading text-3xl font-bold mb-6 text-center">Our Network Directory</h2>
+            <p class="text-center text-gray-600 mb-8">Browse professionals already registered on BuildSmart</p>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-3 mb-8 justify-center">
+                <button onclick="filterByProfession('All')" class="px-6 py-2 rounded-full border-2 border-primary bg-primary text-white font-semibold hover:bg-opacity-90 transition">All</button>
+                <button onclick="filterByProfession('Electrician')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">⚡ Electricians</button>
+                <button onclick="filterByProfession('Plumber')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">🚰 Plumbers</button>
+                <button onclick="filterByProfession('Interior Designer')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">🎨 Designers</button>
+                <button onclick="filterByProfession('Carpenter')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">🪵 Carpenters</button>
+                <button onclick="filterByProfession('HVAC Technician')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">❄️ HVAC</button>
+                <button onclick="filterByProfession('Architect')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">🏗️ Architects</button>
+                <button onclick="filterByProfession('Painter')" class="px-6 py-2 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/10 transition">🎪 Painters</button>
+            </div>
+            
+            <!-- Registered Professionals Grid -->
+            <div id="registeredProfessionalsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </div>
+        
+        <!-- Registration Forms Section -->
+        <h2 class="font-heading text-3xl font-bold mb-8 text-center">Register Now</h2>
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Professional Registration -->
             <div class="flex-1 bg-white rounded-2xl border border-border/50 shadow-lg p-8">
@@ -169,6 +194,65 @@
 </footer>
 
 <script>
+    // Sample registered professionals data
+    let registeredProfessionals = [
+        { name: "John Martinez", profession: "Electrician", city: "Austin, TX", experience: 8, phone: "+1 555-0101", avatar: "⚡", rating: "4.9" },
+        { name: "Sarah Johnson", profession: "Plumber", city: "Dallas, TX", experience: 10, phone: "+1 555-0102", avatar: "🚰", rating: "4.8" },
+        { name: "Emma Williams", profession: "Interior Designer", city: "Houston, TX", experience: 6, phone: "+1 555-0103", avatar: "🎨", rating: "5.0" },
+        { name: "Michael Davis", profession: "Carpenter", city: "Austin, TX", experience: 12, phone: "+1 555-0104", avatar: "🪵", rating: "4.7" },
+        { name: "David Brown", profession: "HVAC Technician", city: "Dallas, TX", experience: 9, phone: "+1 555-0105", avatar: "❄️", rating: "4.8" },
+        { name: "Jessica Lee", profession: "Architect", city: "Houston, TX", experience: 7, phone: "+1 555-0106", avatar: "🏗️", rating: "4.9" },
+        { name: "Robert Wilson", profession: "Electrician", city: "San Antonio, TX", experience: 11, phone: "+1 555-0107", avatar: "⚡", rating: "4.6" },
+        { name: "Amanda Garcia", profession: "Painter", city: "Austin, TX", experience: 5, phone: "+1 555-0108", avatar: "🎪", rating: "4.7" },
+        { name: "Thomas Miller", profession: "Plumber", city: "Houston, TX", experience: 8, phone: "+1 555-0109", avatar: "🚰", rating: "4.8" },
+        { name: "Rachel Green", profession: "Interior Designer", city: "Dallas, TX", experience: 9, phone: "+1 555-0110", avatar: "🎨", rating: "4.9" },
+        { name: "Christopher Jones", profession: "Carpenter", city: "Austin, TX", experience: 14, phone: "+1 555-0111", avatar: "🪵", rating: "4.9" },
+        { name: "Michelle Taylor", profession: "Architect", city: "Austin, TX", experience: 10, phone: "+1 555-0112", avatar: "🏗️", rating: "4.8" }
+    ];
+
+    let currentFilter = 'All';
+
+    function displayProfessionals(data) {
+        const grid = document.getElementById('registeredProfessionalsGrid');
+        grid.innerHTML = data.map(prof => `
+            <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md hover:shadow-xl transition-all">
+                <div class="flex justify-between items-start mb-3">
+                    <div class="text-4xl">${prof.avatar}</div>
+                    <span class="text-primary font-bold">${prof.rating} ★</span>
+                </div>
+                <h3 class="font-heading text-lg font-bold mb-1">${prof.name}</h3>
+                <p class="text-secondary font-semibold text-xs uppercase tracking-wider mb-2">${prof.profession}</p>
+                <div class="space-y-2 mb-4">
+                    <p class="text-gray-600 text-sm">📍 ${prof.city}</p>
+                    <p class="text-gray-600 text-sm">Experience: ${prof.experience} years</p>
+                </div>
+                <div class="border-t border-border pt-3">
+                    <a href="tel:${prof.phone}" class="inline-block w-full text-center bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-opacity-90 transition">Contact</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterByProfession(profession) {
+        currentFilter = profession;
+        
+        // Update active button
+        document.querySelectorAll('button[onclick^="filterByProfession"]').forEach(btn => {
+            btn.classList.remove('bg-primary', 'text-white');
+            btn.classList.add('text-primary');
+        });
+        event.target.classList.add('bg-primary', 'text-white');
+        event.target.classList.remove('text-primary');
+        
+        // Filter and display
+        if (profession === 'All') {
+            displayProfessionals(registeredProfessionals);
+        } else {
+            const filtered = registeredProfessionals.filter(prof => prof.profession === profession);
+            displayProfessionals(filtered);
+        }
+    }
+
     function registerProfessional(event) {
         event.preventDefault();
         const form = event.target;
@@ -186,13 +270,44 @@
             alert('Please fill in all required fields');
             return;
         }
+
+        // Add professional to array
+        const professionAvatars = {
+            "Electrician": "⚡",
+            "Plumber": "🚰",
+            "Interior Designer": "🎨",
+            "Carpenter": "🪵",
+            "HVAC Technician": "❄️",
+            "Architect": "🏗️",
+            "Painter": "🎪",
+            "Roofing Specialist": "🏠",
+            "Structural Engineer": "📐",
+            "Civil Engineer": "🌉",
+            "Electrical Engineer": "⚡",
+            "Mechanical Engineer": "⚙️"
+        };
+
+        const newProfessional = {
+            name: fullName,
+            profession: profession,
+            city: location,
+            experience: parseInt(experience),
+            phone: phone,
+            avatar: professionAvatars[profession] || "👤",
+            rating: "4.8"
+        };
+
+        registeredProfessionals.push(newProfessional);
+        
+        // Refresh display
+        filterByProfession('All');
         
         const messageDiv = document.getElementById('registrationMessage');
         messageDiv.classList.remove('hidden');
         messageDiv.innerHTML = `
             <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
                 <p class="font-semibold">✓ Registration submitted successfully!</p>
-                <p class="text-sm mt-1">Welcome ${fullName}! Your profile as a ${profession} has been created. We'll contact you at ${email} soon.</p>
+                <p class="text-sm mt-1">Welcome ${fullName}! Your profile as a ${profession} has been created and is now visible in our network directory.</p>
             </div>
         `;
         
@@ -236,6 +351,11 @@
             messageDiv.classList.add('hidden');
         }, 5000);
     }
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', function() {
+        displayProfessionals(registeredProfessionals);
+    });
 </script>
 
 </body>

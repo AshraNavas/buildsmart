@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback – BuildSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FDFCF8",
+                        foreground: "#2C2C24",
+                        primary: "#5D7052",
+                        secondary: "#C18C5D",
+                        accent: "#E6DCCD",
+                        muted: "#F0EBE5",
+                        border: "#DED8CF",
+                    },
+                    fontFamily: {
+                        heading: ["Fraunces", "serif"],
+                        body: ["Nunito", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body::before {
+            content: ""; position: fixed; inset: 0;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04; mix-blend-mode: multiply; pointer-events: none; z-index: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-foreground font-body relative">
+
+<nav class="sticky top-4 z-50 max-w-6xl mx-auto bg-white/70 backdrop-blur-md rounded-full border border-border/50 shadow-lg px-6 py-3 flex justify-between items-center mt-4">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-80">
+        <div class="h-10 w-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">B</div>
+        <span class="font-heading font-bold text-lg">BuildSmart</span>
+    </a>
+    <div class="hidden md:flex gap-6 text-sm font-semibold text-primary">
+        <a href="find-pros.html" class="hover:underline">Find Pros</a>
+        <a href="roadmap.html" class="hover:underline">Roadmap</a>
+        <a href="materials.html" class="hover:underline">Materials</a>
+        <a href="professionals.html" class="hover:underline">Professionals</a>
+        <a href="team-dashboard.html" class="hover:underline">Team</a>
+        <a href="join-network.html" class="hover:underline">Join Network</a>
+        <a href="feedback.html" class="hover:underline text-secondary font-bold">Feedback</a>
+    </div>
+</nav>
+
+<section class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">We'd Love Your Feedback</h1>
+            <p class="text-lg text-gray-600">Help us improve BuildSmart by sharing your experience and suggestions</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Feedback Stats -->
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md">
+                    <div class="text-4xl mb-3">⭐</div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Your Rating Matters</h3>
+                    <p class="text-gray-600">Share your experience on a 5-star scale and help other users make informed decisions</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md">
+                    <div class="text-4xl mb-3">💡</div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Suggestions Welcome</h3>
+                    <p class="text-gray-600">Have an idea to make BuildSmart better? We want to hear it!</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-border/50 shadow-md">
+                    <div class="text-4xl mb-3">🙌</div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Community Driven</h3>
+                    <p class="text-gray-600">Your feedback helps us build a better platform for builders and professionals</p>
+                </div>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+                <h2 class="font-heading text-2xl font-bold mb-6 text-primary">Send Your Feedback</h2>
+                <form onsubmit="submitFeedback(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Your Name</label>
+                        <input type="text" required placeholder="John Doe" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email Address</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20"/>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Feedback Category</label>
+                        <select required class="w-full h-10 px-4 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20">
+                            <option value="">Select a category</option>
+                            <option value="Feature Request">Feature Request</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="User Experience">User Experience</option>
+                            <option value="Professional Quality">Professional Quality</option>
+                            <option value="Material Catalog">Material Catalog</option>
+                            <option value="Website Performance">Website Performance</option>
+                            <option value="General Feedback">General Feedback</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">How would you rate BuildSmart?</label>
+                        <div class="flex gap-2" id="ratingStars">
+                            <button type="button" onclick="setRating(1)" class="text-3xl cursor-pointer transition hover:scale-125">⭐</button>
+                            <button type="button" onclick="setRating(2)" class="text-3xl cursor-pointer transition hover:scale-125">⭐</button>
+                            <button type="button" onclick="setRating(3)" class="text-3xl cursor-pointer transition hover:scale-125">⭐</button>
+                            <button type="button" onclick="setRating(4)" class="text-3xl cursor-pointer transition hover:scale-125">⭐</button>
+                            <button type="button" onclick="setRating(5)" class="text-3xl cursor-pointer transition hover:scale-125">⭐</button>
+                        </div>
+                        <input type="hidden" id="rating" value="0" required/>
+                        <p id="ratingText" class="text-sm text-gray-500 mt-2">Click to rate</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Your Feedback</label>
+                        <textarea required placeholder="Tell us what you think..." rows="5" class="w-full px-4 py-3 rounded-lg border border-border outline-none focus:ring-2 ring-primary/20 resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-white rounded-lg px-6 py-3 font-bold hover:bg-opacity-90 transition">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recent Feedback Section -->
+        <div class="bg-white rounded-2xl border border-border/50 shadow-lg p-8">
+            <h2 class="font-heading text-2xl font-bold mb-6 text-center">What Users Are Saying</h2>
+            
+            <div id="feedbackGrid" class="grid md:grid-cols-2 gap-6">
+            </div>
+        </div>
+
+        <div id="feedbackMessage" class="mt-8 text-center hidden">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+                <p class="font-semibold">✓ Thank you for your feedback!</p>
+                <p class="text-sm mt-1">We really appreciate your input and will use it to make BuildSmart even better.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-12 px-6 bg-muted/30">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">← Back to Home</a>
+        <a href="join-network.html" class="bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-opacity-90 transition">Join Network →</a>
+    </div>
+</section>
+
+<footer class="py-12 bg-primary text-white text-center">
+    <p>© 2026 BuildSmart Hub • Supporting the Hands that Build.</p>
+</footer>
+
+<script>
+    let feedbackList = [
+        {
+            name: "Mike Johnson",
+            rating: 5,
+            category: "User Experience",
+            message: "BuildSmart made it so easy to find the right electrician for my home renovation. Highly recommend!",
+            date: "2 days ago"
+        },
+        {
+            name: "Sarah Williams",
+            rating: 5,
+            category: "Feature Request",
+            message: "Love the materials catalog! Would be great to add more decorative items. Keep up the good work!",
+            date: "1 week ago"
+        },
+        {
+            name: "David Chen",
+            rating: 4,
+            category: "General Feedback",
+            message: "Great platform for connecting with professionals. The search filters are really helpful.",
+            date: "1 week ago"
+        },
+        {
+            name: "Emily Rodriguez",
+            rating: 5,
+            category: "Professional Quality",
+            message: "The professionals on this platform are top-notch. Found a great architect through BuildSmart!",
+            date: "2 weeks ago"
+        },
+        {
+            name: "James Taylor",
+            rating: 4,
+            category: "Material Catalog",
+            message: "Good variety of products and prices. Would love to see more supplier comparisons.",
+            date: "2 weeks ago"
+        },
+        {
+            name: "Lisa Anderson",
+            rating: 5,
+            category: "General Feedback",
+            message: "Completed my entire home project using BuildSmart. Worth every penny!",
+            date: "3 weeks ago"
+        }
+    ];
+
+    function setRating(value) {
+        document.getElementById('rating').value = value;
+        const ratingText = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+        document.getElementById('ratingText').textContent = ratingText[value];
+        
+        // Visual feedback
+        const stars = document.querySelectorAll('#ratingStars button');
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.style.opacity = '1';
+            } else {
+                star.style.opacity = '0.3';
+            }
+        });
+    }
+
+    function displayFeedback(data) {
+        const grid = document.getElementById('feedbackGrid');
+        grid.innerHTML = data.map(feedback => `
+            <div class="bg-muted/20 p-6 rounded-2xl border border-border/50">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="font-heading text-lg font-bold">${feedback.name}</h3>
+                        <p class="text-xs text-gray-500">${feedback.date}</p>
+                    </div>
+                    <span class="text-sm font-semibold text-secondary bg-white px-3 py-1 rounded-full">${feedback.category}</span>
+                </div>
+                <div class="flex mb-3">
+                    ${'⭐'.repeat(feedback.rating)}<span class="text-gray-300">${'⭐'.repeat(5-feedback.rating)}</span>
+                </div>
+                <p class="text-gray-700">"${feedback.message}"</p>
+            </div>
+        `).join('');
+    }
+
+    function submitFeedback(event) {
+        event.preventDefault();
+        const form = event.target;
+        const inputs = form.querySelectorAll('input, select, textarea');
+        
+        const name = inputs[0].value;
+        const email = inputs[1].value;
+        const category = inputs[2].value;
+        const rating = parseInt(document.getElementById('rating').value);
+        const message = inputs[4].value;
+        
+        if (!name || !email || !category || rating === 0 || !message) {
+            alert('Please fill in all fields and select a rating');
+            return;
+        }
+
+        // Add new feedback to top of list
+        const newFeedback = {
+            name: name,
+            rating: rating,
+            category: category,
+            message: message,
+            date: "Just now"
+        };
+
+        feedbackList.unshift(newFeedback);
+        displayFeedback(feedbackList);
+
+        // Show success message
+        const messageDiv = document.getElementById('feedbackMessage');
+        messageDiv.classList.remove('hidden');
+        form.reset();
+        document.getElementById('rating').value = 0;
+        document.getElementById('ratingText').textContent = 'Click to rate';
+        
+        // Reset star opacity
+        document.querySelectorAll('#ratingStars button').forEach(star => {
+            star.style.opacity = '0.3';
+        });
+
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 5000);
+    }
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', function() {
+        displayFeedback(feedbackList);
+        // Reset star opacity
+        document.querySelectorAll('#ratingStars button').forEach(star => {
+            star.style.opacity = '0.3';
+        });
+    });
+</script>
+
+</body>
+</html>
