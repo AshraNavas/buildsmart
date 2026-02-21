@@ -88,7 +88,7 @@ List the key features of your project:
 
 ## Project Demo
 
-### Video
+
 
 
 *Explain what the video demonstrates - key features, user flow, technical highlights*
